@@ -1,0 +1,23 @@
+{
+  "name": "ainftm",
+  "version": "0.0.1",
+  "description": "AI image generated NFT marketpalce",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeepSoul71/AI-NFT-MarketPlace.git"
+  },
+  "keywords": [
+    "nft",
+    "ai"
+  ],
+  "author": "Hcrypto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DeepSoul71/AI-NFT-MarketPlace/issues"
+  },
+  "homepage": "https://github.com/DeepSoul71/AI-NFT-MarketPlace#readme"
+}
