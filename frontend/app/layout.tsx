@@ -9,6 +9,7 @@ import { cookieToInitialState } from 'wagmi'
 import { config } from '@/config'
 import ContextProvider from '@/context'
 
+import {Providers} from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,9 +27,11 @@ export default function RootLayout({
   const initialState = cookieToInitialState(config, headers().get('cookie'))
 
   return (
-    <html lang="en">
+    <html lang="en" className='dark'>
       <body>
-        <ContextProvider initialState={initialState}>{children}</ContextProvider>
+        <Providers>
+          <ContextProvider initialState={initialState}>{children}</ContextProvider>
+        </Providers>
       </body>
     </html>
   );
