@@ -4,8 +4,10 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-start-rgb: 86, 177, 242;
+  --background-medium-rgb: 67, 144, 240;
+  --background-medium1-rgb: 55, 133, 238;
+  --background-end-rgb: 47, 128, 237;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +21,10 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
+      125deg,
       transparent,
+      rgb(var(--background-medium-rgb)),
+      rgb(var(--background-medium1-rgb)),
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
@@ -30,4 +34,8 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.link.active{
+  color:white;
 }
