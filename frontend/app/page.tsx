@@ -55,7 +55,6 @@ export default function Home() {
                 <>Documentation</>
                 <>CoinMarketCap</>
                 <>CoinGecko</>
-                <>Pancakeswap</>
                 <>WhitePaper</>
               </div>
             </div>
