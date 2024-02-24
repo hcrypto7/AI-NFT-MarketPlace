@@ -2,6 +2,7 @@
 
 import {useEffect, useState} from 'react';
 import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
 import nftmAbi from "@/contracts/Marketplace.json";
 import { uploadFileToIPFS, uploadJSONToIPFS } from './pinata';
 
@@ -18,6 +19,7 @@ const Minting = () => {
   return(
     <>
       <Navbar/>
+      <Sidebar/>
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="min-h-[36rem] min-w-[32rem] bg-transparent shadow-xl rounded-xl p-10">
             <div className='flex justify-center'>

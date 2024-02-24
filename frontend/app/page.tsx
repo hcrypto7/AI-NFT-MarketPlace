@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { NewspaperIcon, PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { FaTelegram, FaDiscord, FaMailBulk, FaFacebook, FaTwitter } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
-
+import Link from 'next/link'
 
  
 const Exchange = dynamic(() => import('@/components/Exchange'), { ssr: false })
@@ -25,24 +25,24 @@ export default function Home() {
           </div>
           <w3m-button /> 
         </div>
-        <section className='relative flex justify-center items-center mb-20'>
+        <section className='relative flex justify-center items-center mb-32'>
           <img src="./home-bg.png" className="w-[42%]"/>
           <div className="w-[90%] m-auto flex flex-col items-center gap-10 absolute transalte-y-1/2">
-            <h1 className="font-medium text-center sm:text-start text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-loose text-white">
+            <h1 className="font-medium text-center sm:text-center text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-loose text-white">
               HONESTY | TRANSPARENCY | SIMPLICITY | TRUST
             </h1>
             <h3 className="text-white text-4xl font-light">WE GROW TOGETHER</h3>
             <div className="w-32 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400"></div>
             <div className="flex">
-              <button className="btn glass-effect blue-effect btn-glow flex items-center" onClick={() => router.push('/mint')}><PaperAirplaneIcon className="h-8 w-8"/>Lunch APP</button>
-              <button className="btn glass-effect blue-effect btn-glow flex items-center"><NewspaperIcon className="h-8 w-8"/>WhitePaper</button>
+              <Link href="/mint" className="btn glass-effect blue-effect btn-glow flex items-center"><PaperAirplaneIcon className="h-8 w-8"/>Lunch APP</Link>
+              <Link href="./NYNYC_whitepaper.pdf" target='_blink' className="btn glass-effect blue-effect btn-glow flex items-center"><NewspaperIcon className="h-8 w-8"/>WhitePaper</Link>
             </div>
           </div>
         </section>
-        <section className="w-[80%] m-auto mb-20">
+        <section className="w-[80%] m-auto mb-32">
           <div className="grid grid-cols-2 gap-4">
             <div className="white-effect glass-effect rounded-xl flex justify-center items-center">
-              <h1 className="text-4xl text-justify p-5">Buy, Sell, and Swap Crypto: Simple, Fast, Free of Custody</h1>
+              <h1 className="text-3xl text-center p-5">Buy, Sell, and Swap Crypto: Simple, Fast, Free of Custody</h1>
             </div>
             <Exchange/>
           </div>
