@@ -9,7 +9,7 @@ export default function ConnectButton() {
   const router = useRouter();
   return (
     // <nav className='z-10 fixed top-0 flex justify-between items-center w-full px-8 py-4 backdrop-blur-xl bg-white/20'>
-    <nav className='z-10 relative top-0 flex justify-between items-center w-full px-20 py-8 bg-transparent'>
+    <nav className='side-navbar z-10 relative top-0 flex justify-between items-center w-full px-20 py-8 bg-transparent'>
       <div>
         <Link href='/'><img src='./logo.png' className="w-28 cursor-pointer"/></Link>
       </div>
