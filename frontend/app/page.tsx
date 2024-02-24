@@ -51,15 +51,29 @@ export default function Home() {
           <div className='grid grid-cols-4'>
             <div className="">
               <h1 className="text-left font-bold text-2xl">ABOUT</h1>
-              <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400"></div>
+              <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400">
+                <>Documentation</>
+                <>CoinMarketCap</>
+                <>CoinGecko</>
+                <>Pancakeswap</>
+                <>WhitePaper</>
+              </div>
             </div>
             <div className="">
-              <h1 className="text-left font-bold text-2xl">PROTOCOL</h1>
-              <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400"></div>
+              <h1 className="text-left font-bold text-2xl">ECOSYSTEM</h1>
+              <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400">
+                <>NFT</>
+                <>Staking</>
+                <>Game</>
+                <>Mining BNB</>
+                <>Tokenomics</>
+              </div>
             </div>
             <div className="">
-              <h1 className="text-left font-bold text-2xl">SUPPORT</h1>
-              <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400"></div>
+              <h1 className="text-left font-bold text-2xl">SUBSCRIBE</h1>
+              <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400">
+                <>Sign up for Alerts, Special features and Updates. Give your feedback.</>
+              </div>
             </div>
             <div className="">
               <h1 className="text-left font-bold text-2xl">COMMUNITY</h1>
