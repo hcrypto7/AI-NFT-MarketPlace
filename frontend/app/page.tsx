@@ -41,7 +41,7 @@ export default function Home() {
         </section>
         <section className="w-[80%] m-auto mb-32">
           <div className="grid grid-cols-2 gap-4">
-            <div className="white-effect glass-effect rounded-xl flex justify-center items-center">
+            <div className="blue-effect glass-effect rounded-xl flex justify-center items-center">
               <h1 className="text-3xl text-center p-5">Buy, Sell, and Swap Crypto: Simple, Fast, Free of Custody</h1>
             </div>
             <Exchange/>
@@ -65,19 +65,19 @@ export default function Home() {
               <h1 className="text-left font-bold text-2xl">COMMUNITY</h1>
               <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400"></div>
               <div className='flex items-center gap-4'>
-                <div className="white-effect glass-effect rounded-lg"><FaTelegram className='h-10 w-10 p-2'/></div>Telegram
+                <div className="blue-effect glass-effect rounded-lg"><FaTelegram className='h-10 w-10 p-2'/></div>Telegram
               </div>
               <div className='flex items-center gap-4'>
-                <div className="white-effect glass-effect rounded-lg"><FaFacebook className='h-10 w-10 p-2'/></div>Fackbook
+                <div className="blue-effect glass-effect rounded-lg"><FaFacebook className='h-10 w-10 p-2'/></div>Fackbook
               </div>
               <div className='flex items-center gap-4'>
-                <div className="white-effect glass-effect rounded-lg"><FaTwitter className='h-10 w-10 p-2'/></div>Twitter
+                <div className="blue-effect glass-effect rounded-lg"><FaTwitter className='h-10 w-10 p-2'/></div>Twitter
               </div>
               <div className='flex items-center gap-4'>
-                <div className="white-effect glass-effect rounded-lg"><FaMailBulk className='h-10 w-10 p-2'/></div>Mail
+                <div className="blue-effect glass-effect rounded-lg"><FaMailBulk className='h-10 w-10 p-2'/></div>Mail
               </div>
               <div className='flex items-center gap-4'>
-                <div className="white-effect glass-effect rounded-lg"><FaDiscord className='h-10 w-10 p-2'/></div>Discord
+                <div className="blue-effect glass-effect rounded-lg"><FaDiscord className='h-10 w-10 p-2'/></div>Discord
               </div>
             </div>
           </div>

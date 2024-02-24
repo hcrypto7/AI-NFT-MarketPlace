@@ -12,6 +12,7 @@
   --bg-board-color: 59,208,216,.2;
   --bg-board-color-2: 59,208,216,0;
   --primary-color: 111, 76, 255;
+  --board-color: 19, 26, 54;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -142,4 +143,20 @@ body {
   inset: 0;
   position: absolute;
   mask-image: radial-gradient(at -31% -58%,rgba(0,0,0,.5) 34%,transparent 60%),linear-gradient(270deg,rgba(0,0,0,.2) 0,transparent 13%),linear-gradient(rgba(0,0,0,.05),rgba(0,0,0,.05));
+}
+
+.link.active{
+  color:dodgerblue;
+}
+
+.top-navbar{
+  background-color: rgb(var(--board-color));
+}
+
+.side-navbar{
+  background-color: rgb(var(--board-color));
+}
+
+.main-board{
+  background: radial-gradient(circle at center, );
 }
