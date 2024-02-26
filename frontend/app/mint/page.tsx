@@ -6,6 +6,11 @@ import Sidebar from '@/components/Sidebar';
 import nftmAbi from '@/contracts/Marketplace.json';
 import { uploadFileToIPFS, uploadJSONToIPFS } from './pinata';
 import Content from '@/components/Content';
+import ImageCard from '@/components/ImageCard';
+import { Accordion, AccordionItem } from "@nextui-org/react";
+import { FaEye } from "react-icons/fa";
+
+
 const Minting = () => {
   const addressNFTM = nftmAbi.address;
   const [uploadFileName, setUploadFileName] = useState<string>('');
@@ -24,6 +29,16 @@ const Minting = () => {
             <div className="flex justify-center">
               <h1 className="text-center text-3xl">Mint your NFT!</h1>
             </div>
+            <Accordion suppressHydrationWarning>
+              <AccordionItem key="anchor" aria-label="Anchor" indicator={<FaEye />} title="Show samples" suppressHydrationWarning>
+                <div className='grid grid-cols-1 md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-4 gap-4'>
+                  <ImageCard />
+                  <ImageCard />
+                  <ImageCard />
+                  <ImageCard />
+                </div>
+              </AccordionItem>
+            </Accordion>
             <label className="block">
               <span className="sr-only">Choose profile photo</span>
               <input

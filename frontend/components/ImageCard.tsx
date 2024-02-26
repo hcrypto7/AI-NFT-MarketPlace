@@ -13,7 +13,7 @@ export default function App() {
         <Image
           alt="Card background"
           className="object-cover rounded-xl"
-          src="/images/hero-card-complete.jpeg"
+          src="/logo.png"
           width={270}
         />
       </CardBody>
