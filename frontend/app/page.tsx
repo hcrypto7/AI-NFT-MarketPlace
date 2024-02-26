@@ -7,26 +7,26 @@ import { FaTelegram, FaDiscord, FaMailBulk, FaFacebook, FaTwitter } from "react-
 import { useRouter } from 'next/navigation';
 import Link from 'next/link'
 
- 
+
 const Exchange = dynamic(() => import('@/components/Exchange'), { ssr: false })
- 
+
 export default function Home() {
 
   const notify = () => toast("This is a toast notification !");
 
   const router = useRouter();
-  
+
   return (
     <main className="min-h-screen">
       <div className="realtive px-20 py-8">
         <div className="w-full flex justify-between items-center">
           <div className="flex justify-between">
-            <img src='./logo.png' className='w-28'/>
+            <img src="./logo.png" className="w-28" />
           </div>
-          <w3m-button /> 
+          <w3m-button />
         </div>
-        <section className='relative flex justify-center items-center mb-32'>
-          <img src="./home-bg.png" className="w-[42%]"/>
+        <section className="relative flex justify-center items-center mb-32">
+          <img src="./home-bg.png" className="w-[42%]" />
           <div className="w-[90%] m-auto flex flex-col items-center gap-10 absolute transalte-y-1/2">
             <h1 className="font-medium text-center sm:text-center text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-loose text-white">
               HONESTY | TRANSPARENCY | SIMPLICITY | TRUST
@@ -34,21 +34,36 @@ export default function Home() {
             <h3 className="text-white text-4xl font-light">WE GROW TOGETHER</h3>
             <div className="w-32 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400"></div>
             <div className="flex">
-              <Link href="/mint" className="btn glass-effect blue-effect btn-glow flex items-center"><PaperAirplaneIcon className="h-8 w-8"/>Lunch APP</Link>
-              <Link href="./NYNYC_whitepaper.pdf" target='_blink' className="btn glass-effect blue-effect btn-glow flex items-center"><NewspaperIcon className="h-8 w-8"/>WhitePaper</Link>
+              <Link
+                href="/mint"
+                className="btn glass-effect blue-effect btn-glow flex items-center"
+              >
+                <PaperAirplaneIcon className="h-8 w-8" />
+                Lunch APP
+              </Link>
+              <Link
+                href="./NYNYC_whitepaper.pdf"
+                target="_blink"
+                className="btn glass-effect blue-effect btn-glow flex items-center"
+              >
+                <NewspaperIcon className="h-8 w-8" />
+                WhitePaper
+              </Link>
             </div>
           </div>
         </section>
         <section className="w-[80%] m-auto mb-32">
           <div className="grid grid-cols-2 gap-4">
             <div className="blue-effect glass-effect rounded-xl flex justify-center items-center">
-              <h1 className="text-3xl text-center p-5">Buy, Sell, and Swap Crypto: Simple, Fast, Free of Custody</h1>
+              <h1 className="text-3xl text-center p-5">
+                Buy, Sell, and Swap Crypto: Simple, Fast, Free of Custody
+              </h1>
             </div>
-            <Exchange/>
+            <Exchange />
           </div>
         </section>
         <section className="w-full">
-          <div className='grid grid-cols-4'>
+          <div className="grid grid-cols-4">
             <div className="">
               <h1 className="text-left font-bold text-2xl">ABOUT</h1>
               <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400">
@@ -71,32 +86,50 @@ export default function Home() {
             <div className="">
               <h1 className="text-left font-bold text-2xl">SUBSCRIBE</h1>
               <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400">
-                <>Sign up for Alerts, Special features and Updates. Give your feedback.</>
+                <>
+                  Sign up for Alerts, Special features and Updates. Give your
+                  feedback.
+                </>
               </div>
             </div>
             <div className="">
               <h1 className="text-left font-bold text-2xl">COMMUNITY</h1>
               <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400"></div>
-              <div className='flex items-center gap-4'>
-                <div className="blue-effect glass-effect rounded-lg"><FaTelegram className='h-10 w-10 p-2'/></div>Telegram
+              <div className="flex items-center gap-4">
+                <div className="blue-effect glass-effect rounded-lg">
+                  <FaTelegram className="h-10 w-10 p-2" />
+                </div>
+                Telegram
               </div>
-              <div className='flex items-center gap-4'>
-                <div className="blue-effect glass-effect rounded-lg"><FaFacebook className='h-10 w-10 p-2'/></div>Fackbook
+              <div className="flex items-center gap-4">
+                <div className="blue-effect glass-effect rounded-lg">
+                  <FaFacebook className="h-10 w-10 p-2" />
+                </div>
+                Fackbook
               </div>
-              <div className='flex items-center gap-4'>
-                <div className="blue-effect glass-effect rounded-lg"><FaTwitter className='h-10 w-10 p-2'/></div>Twitter
+              <div className="flex items-center gap-4">
+                <div className="blue-effect glass-effect rounded-lg">
+                  <FaTwitter className="h-10 w-10 p-2" />
+                </div>
+                Twitter
               </div>
-              <div className='flex items-center gap-4'>
-                <div className="blue-effect glass-effect rounded-lg"><FaMailBulk className='h-10 w-10 p-2'/></div>Mail
+              <div className="flex items-center gap-4">
+                <div className="blue-effect glass-effect rounded-lg">
+                  <FaMailBulk className="h-10 w-10 p-2" />
+                </div>
+                Mail
               </div>
-              <div className='flex items-center gap-4'>
-                <div className="blue-effect glass-effect rounded-lg"><FaDiscord className='h-10 w-10 p-2'/></div>Discord
+              <div className="flex items-center gap-4">
+                <div className="blue-effect glass-effect rounded-lg">
+                  <FaDiscord className="h-10 w-10 p-2" />
+                </div>
+                Discord
               </div>
             </div>
           </div>
         </section>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </main>
   );
 }
