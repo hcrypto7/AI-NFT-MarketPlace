@@ -14,7 +14,7 @@ contract NFTMarketplace is ERC721URIStorage {
     //owner is the contract address that created the smart contract
     address payable owner;
     //The fee charged by the marketplace to be allowed to list an NFT
-    uint256 listPrice = 0.01 ether;
+    uint256 listPrice = 0.001 ether;
 
     //The structure to store info about a listed token
     struct ListedToken {
@@ -37,7 +37,7 @@ contract NFTMarketplace is ERC721URIStorage {
     //This mapping maps tokenId to token info and is helpful when retrieving details about a tokenId
     mapping(uint256 => ListedToken) private idToListedToken;
 
-    constructor() ERC721("NFTMarketplace", "NFTM") {
+    constructor() ERC721("NYNYCNFTMarketpalce", "NYNYCNFT") {
         owner = payable(msg.sender);
     }
 

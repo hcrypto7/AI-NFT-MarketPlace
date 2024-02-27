@@ -1,18 +1,20 @@
 'use client'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import dynamic from 'next/dynamic'
 import { NewspaperIcon, PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { FaTelegram, FaDiscord, FaMailBulk, FaFacebook, FaTwitter } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
-import Link from 'next/link'
+import Link from 'next/link';
+import { Suspense } from 'react'
+import loadable from "@loadable/component";
+
+const Exchange = loadable(() => import("@/components/Exchange"));
 
 
-const Exchange = dynamic(() => import('@/components/Exchange'), { ssr: false })
+
+// const Exchange = dynamic(() => import('@/components/Exchange'), { ssr: false })
 
 export default function Home() {
 
-  const notify = () => toast("This is a toast notification !");
 
   const router = useRouter();
 
@@ -59,7 +61,9 @@ export default function Home() {
                 Buy, Sell, and Swap Crypto: Simple, Fast, Free of Custody
               </h1>
             </div>
-            <Exchange />
+              {/* <Suspense fallback={<p>Loading feed...</p>}> */}
+                <Exchange fallback={<div>Loading...</div>}/>
+              {/* </Suspense> */}
           </div>
         </section>
         <section className="w-full">
@@ -129,7 +133,6 @@ export default function Home() {
           </div>
         </section>
       </div>
-      <ToastContainer />
     </main>
   );
 }
