@@ -52,7 +52,10 @@ export default function Home() {
             <div className="">
               <h1 className="text-left font-bold text-2xl">ABOUT</h1>
               <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400">
-                <>Documentation</>
+                <a href="">Documentation</a>
+                <a href="">CoinMarketCap</a>
+                <a href="">CoinGecko</a>
+                <a href="NYNYC whitepaper.pdf">WhitePaper</a>
                 <>CoinMarketCap</>
                 <>CoinGecko</>
                 <>WhitePaper</>
