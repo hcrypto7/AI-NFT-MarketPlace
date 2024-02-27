@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@loadable/component": "^5.16.3",
     "@nextui-org/react": "^2.2.9",
     "@tanstack/react-query": "^5.22.2",
     "@web3modal/wagmi": "^4.0.7",
@@ -21,6 +22,7 @@
     "react-icons": "^5.0.1",
     "react-toastify": "^10.0.4",
     "sass": "^1.71.1",
+    "sweetalert2": "^11.10.5",
     "viem": "^2.7.12",
     "wagmi": "^2.5.7"
   },
