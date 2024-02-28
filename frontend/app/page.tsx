@@ -25,7 +25,10 @@ export default function Home() {
           <div className="flex justify-between">
             <img src="./logo.png" className="w-28" />
           </div>
-          <w3m-button />
+          <div className='flex flex-row gap-4 items-center'>
+            <button className=' w-44 h-14 btn glass-effect blue-effect btn-glow flex items-center text-xs justify-items-center'>Buy NYNYC</button>
+            <w3m-button />
+          </div>
         </div>
         <section className="relative flex justify-center items-center mb-32">
           <img src="./home-bg.png" className="w-[42%]" />
@@ -55,81 +58,90 @@ export default function Home() {
           </div>
         </section>
         <section className="w-[80%] m-auto mb-32">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="blue-effect glass-effect rounded-xl flex justify-center items-center">
-              <h1 className="text-3xl text-center p-5">
-                Buy, Sell, and Swap Crypto: Simple, Fast, Free of Custody
+          <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+            <div className="blue-effect glass-effect rounded-xl flex flex-col justify-center items-center">
+              <h1 className="text-2xl text-center p-5">
+                Buy, Sell, and Swap Crypto
+              </h1>
+              <h1 className='text-3xl text-center p-5 text-gray-300'>
+                Simple, Fast, Free of Custody
               </h1>
             </div>
-              {/* <Suspense fallback={<p>Loading feed...</p>}> */}
-                <Exchange fallback={<div>Loading...</div>}/>
-              {/* </Suspense> */}
+            {/* <Suspense fallback={<p>Loading feed...</p>}> */}
+            <Exchange fallback={<div>Loading...</div>} />
+            {/* </Suspense> */}
           </div>
         </section>
-        <section className="w-full">
+        <section className="w-[80%] m-auto px-20">
           <div className="grid grid-cols-4">
-            <div className="">
-              <h1 className="text-left font-bold text-2xl">ABOUT</h1>
-              <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400">
-                <>Documentation</>
-                <>CoinMarketCap</>
-                <>CoinGecko</>
-                <>WhitePaper</>
+            <div className="flex flex-col">
+              <h1 className="text-left font-bold text-md">ABOUT</h1>
+              <div className="items-start w-20 h-0.5 my-3 rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400"></div>
+              <div className='flex flex-col text-gray-400'>
+                <Link className="text-left text-md my-1" href="./NYNYC_whitepaper.pdf">WhitePaper</Link>
+                <Link className="text-left text-md my-1" href="/comingSoon">Documentation</Link>
+                <Link className="text-left text-md my-1" href="/comingSoon">CoinMarketCap</Link>
+                <Link className="text-left text-md my-1" href="/comingSoon">CoinGecko</Link>
+                <Link className="text-left text-md my-1" href="/comingSoon">Disclaimer</Link>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <h1 className="text-left font-bold text-md">ECOSYSTEM</h1>
+              <div className="items-start w-20 h-0.5 my-3 rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400"></div>
+              <div className='flex flex-col text-gray-400'>
+                <Link className='text-left text-md my-1' href='/mint'>NFT mint</Link>
+                <Link className='text-left text-md my-1' href="/comingSoon">Staking</Link>
+                <Link className='text-left text-md my-1' href="/comingSoon">Game</Link>
+                <Link className='text-left text-md my-1' href="/comingSoon">Mining BNB</Link>
+                <Link className='text-left text-md my-1' href="/comingSoon">New NFT collection</Link>
+                <Link className='text-left text-md my-1' href="/tokenomics">Tokenomics</Link>
               </div>
             </div>
             <div className="">
-              <h1 className="text-left font-bold text-2xl">ECOSYSTEM</h1>
-              <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400">
-                <>NFT</>
-                <>Staking</>
-                <>Game</>
-                <>Mining BNB</>
-                <>Tokenomics</>
+              <h1 className="text-left font-bold text-md">SUPPORT</h1>
+              <div className="items-start w-20 h-0.5 my-3 rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400"></div>
+              <div className='flex flex-col text-gray-400'>
+                <Link className='text-left text-md my-1' href="/stared">Getting Started</Link>
+                <Link className='text-left text-md my-1' href="/faq">FAQ</Link>
               </div>
             </div>
-            <div className="">
-              <h1 className="text-left font-bold text-2xl">SUBSCRIBE</h1>
-              <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400">
-                <>
-                  Sign up for Alerts, Special features and Updates. Give your
-                  feedback.
-                </>
-              </div>
-            </div>
-            <div className="">
-              <h1 className="text-left font-bold text-2xl">COMMUNITY</h1>
-              <div className="inline-block items-start w-20 h-1 my-2 mx-auto rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400"></div>
-              <div className="flex items-center gap-4">
+            <div className="flex flex-col">
+              <h1 className="text-left font-bold text-md">COMMUNITY</h1>
+              <div className="items-start w-20 h-0.5 my-3 rounded-full  bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-400"></div>
+              <Link className="flex items-center gap-4 text-gray-400" href="https://web.telegram.org/a/#-1002038937912">
                 <div className="blue-effect glass-effect rounded-lg">
                   <FaTelegram className="h-10 w-10 p-2" />
                 </div>
                 Telegram
-              </div>
-              <div className="flex items-center gap-4">
+              </Link>
+              <Link className="flex items-center gap-4 text-gray-400" href="https://www.facebook.com/NYNYCoins">
                 <div className="blue-effect glass-effect rounded-lg">
                   <FaFacebook className="h-10 w-10 p-2" />
                 </div>
                 Fackbook
-              </div>
-              <div className="flex items-center gap-4">
+              </Link>
+              <Link className="flex items-center gap-4 text-gray-400" href="https://twitter.com/nynycoins">
                 <div className="blue-effect glass-effect rounded-lg">
                   <FaTwitter className="h-10 w-10 p-2" />
                 </div>
                 Twitter
-              </div>
-              <div className="flex items-center gap-4">
+              </Link>
+              {/* <Link className="flex items-center gap-4 text-gray-400">
                 <div className="blue-effect glass-effect rounded-lg">
                   <FaMailBulk className="h-10 w-10 p-2" />
                 </div>
                 Mail
-              </div>
-              <div className="flex items-center gap-4">
+              </Link> */}
+              <Link className="flex items-center gap-4 text-gray-400" href="https://discord.com/channels/1193296401245950033/1193296401245950036">
                 <div className="blue-effect glass-effect rounded-lg">
                   <FaDiscord className="h-10 w-10 p-2" />
                 </div>
                 Discord
-              </div>
+              </Link>
             </div>
+          </div>
+          <div className='flex mx-auto my-20 text-2xl text-gray-400'>
+            <h1>@NYNYC - 2024. All Rights Reserved.</h1>
           </div>
         </section>
       </div>
