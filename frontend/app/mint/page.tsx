@@ -10,11 +10,9 @@ import ImageCard from '@/components/ImageCard';
 import { Accordion, AccordionItem } from "@nextui-org/react";
 import { FaEye } from "react-icons/fa";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link} from "@nextui-org/react";
-import Swal from 'sweetalert2'
 import { showToast } from '@/helper/ToastNotify';
-import { type BaseError, useAccount, useBalance, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
-import { parseEther } from 'viem'
-
+import { type BaseError, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
+import { ParseEther, parseEther } from 'viem';
 
 const Minting = () => {
 
@@ -24,8 +22,13 @@ const Minting = () => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [nftName, setNftName] = useState<string>("");
   const [fileURL, setFileURL] = useState<string>("");
-  const { address } = useAccount();
-  const { data: hash,isPending, error, writeContract } = useWriteContract();
+  const {
+    data: hash,
+    isPending, 
+    error,
+    writeContract
+  } = useWriteContract();
+
 
   // upload metadata of image to the pinata IPFS
   const _uploadMetaData = (nftColName:string, nftFileURL:string) => {
@@ -40,6 +43,7 @@ const Minting = () => {
       const nftJSON = {
         nftName, image: nftFileURL
       }
+      console.log('nftJson:', nftJSON);
         //upload the metadata JSON to IPFS
       uploadJSONToIPFS(nftJSON)
       .then(res=>{
@@ -57,28 +61,25 @@ const Minting = () => {
 
   const _mint = async () => {
     console.log('upload:', uploadFileName);
-    console.log(nftName);
     const result = await uploadFileToIPFS(uploadFileName);
     if (result?.success === true) {
-      console.log(result?.pinataURL);
+      console.log("uploaded image url:",result?.pinataURL);
       setFileURL(result?.pinataURL);
     } else {
       showToast("error", "uploading Error");
     }
     _uploadMetaData(nftName, result?.pinataURL).then(res=>{
-      console.log(res);
       if (res.success === true) {
         showToast("success", "Successfully uploaded");
-        console.log("account address", address);
-        console.log(res?.pinataURL, parseEther('0.0001'), contractAddress, contractAbi);
-        writeContract({
-          contractAbi,
-          address: contractAddress,
-          functionName: 'createToken',
-          args:[res?.pinataURL, parseEther('0.001')]});
+        console.log("uploaded Metadata url:", res?.pinataURL);
+        writeContract({ 
+          address: contractAddress, 
+          abi: contractAbi,
+          functionName: 'createToken', 
+          args: [res?.pinataURL, parseEther('0.001')], 
+        });
       }
     }); // or we can use useEffect() hook for state update. the state variable will be update after re-rendering.
-    
   };
 
   const { isLoading: isConfirming, isSuccess: isConfirmed } = 
@@ -132,9 +133,8 @@ const Minting = () => {
               <button
                 onClick={() => _mint}
                 className="text-white bg-violet-500 rounded-full px-9 py-2"
-                disabled={isPending} 
               >
-                {isPending ? 'Confirming...' : 'Mint'} 
+                Mint
               </button>
               <Button onPress={onOpen}>Mint NFT</Button>
             </div>
@@ -162,6 +162,13 @@ const Minting = () => {
                         onChange={(event)=>setNftName(event.target.value)}
                       />
                     </div>
+                    {hash && <div>Transaction Hash: {hash}</div>} 
+                    {isConfirming && <div>Waiting for confirmation...</div>} 
+                    {isConfirmed && <div>Transaction confirmed.</div>}
+                    {isPending ? 'Confirming...' : 'Mint'} 
+                    {error && ( 
+                      <div>Error: {(error as BaseError).shortMessage || error.message}</div> 
+                    )} 
                   </ModalBody>
                   <ModalFooter>
                     <Button color="danger" variant="light" onPress={onClose}>
@@ -170,12 +177,6 @@ const Minting = () => {
                     <Button color="primary" onClick={_mint}>
                       Mint
                     </Button>
-                      {hash && <div>Transaction Hash: {hash}</div>}
-                      {isConfirming && <div>Waiting for confirmation...</div>} 
-                      {isConfirmed && <div>Transaction confirmed.</div>} 
-                      {error && ( 
-                        <div>Error: {(error as BaseError).shortMessage || error.message}</div> 
-                      )} 
                   </ModalFooter>
                 </>
               )}
