@@ -1,8 +1,8 @@
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
 
-import { cookieStorage, createStorage, createConfig, http } from 'wagmi'
+import { cookieStorage, createStorage, createConfig, http, Config } from 'wagmi'
 import { mainnet, sepolia, bsc, bscTestnet, polygon, polygonMumbai } from 'wagmi/chains'
-import { walletConnect, injected, metaMask, safe, coinbaseWallet } from 'wagmi/connectors'
+import { walletConnect, injected, coinbaseWallet } from 'wagmi/connectors'
 
 // Get projectId at https://cloud.walletconnect.com
 export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID
@@ -10,8 +10,8 @@ export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID
 if (!projectId) throw new Error('Project ID is not defined')
 
 const metadata = {
-  name: 'AINFT',
-  description: 'NYNYC TokenAPP',
+  name: 'Web3Modal',
+  description: 'Web3Modal Example',
   url: 'https://web3modal.com', // origin must match your domain & subdomain
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
@@ -24,7 +24,9 @@ export const config = createConfig({
     [sepolia.id]: http(),
     [bsc.id]: http(),
     [polygon.id]: http(),
-    [polygonMumbai.id]: http(),
+    [polygonMumbai.id]: http("https://polygon-mumbai.g.alchemy.com/v2/EcSrakQPOXrrDZq9rY3D_JPAlVe6QpBO",
+    {key: 'EcSrakQPOXrrDZq9rY3D_JPAlVe6QpBO'}
+    ),
     [bscTestnet.id]: http(),
   },
   connectors: [
@@ -34,11 +36,9 @@ export const config = createConfig({
       appName: metadata.name,
       appLogoUrl: metadata.icons[0]
     }),
-    metaMask(),
-    safe()
   ],
   ssr: true,
   storage: createStorage({
     storage: cookieStorage
-  })
+  }),
 })
