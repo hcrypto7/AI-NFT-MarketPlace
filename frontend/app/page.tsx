@@ -23,7 +23,7 @@ export default function Home() {
       <div className="realtive px-20 py-8">
         <div className="w-full flex justify-between items-center">
           <div className="flex justify-between">
-            <img src="./logo.png" className="w-28" />
+            <img src="./logo.png" className="w-[744px]" />
           </div>
           <div className='flex flex-row gap-4 items-center'>
             <button className=' w-44 h-14 btn glass-effect blue-effect btn-glow flex items-center text-xs justify-items-center'>Buy NYNYC</button>
