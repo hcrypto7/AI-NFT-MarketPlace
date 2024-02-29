@@ -8,7 +8,7 @@ import Content from '@/components/Content';
 import ImageCard from '@/components/ImageCard';
 import { Accordion, AccordionItem } from "@nextui-org/react";
 
-import { FaEye, FaImage } from "react-icons/fa";
+import { FaEye, FaImage, FaImages } from "react-icons/fa";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link } from "@nextui-org/react";
 import { showToast } from '@/helper/ToastNotify';
 import { type BaseError, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
@@ -84,13 +84,15 @@ const Minting = () => {
       args: [contractAddress, parseEther('1')],
     });
     console.log("tx1:", tx);
-    const result = await uploadFileToIPFS(uploadFileName);
-    if (result?.success === true) {
-      setFileURL(result?.pinataURL);
-    } else {
-      showToast("error", "Uploading Error");
-    }
-    _uploadMetaData(nftName, result?.pinataURL).then(async(res)=>{
+    
+    // const result = await uploadFileToIPFS(uploadFileName);
+    // if (result?.success === true) {
+    //   setFileURL(result?.pinataURL);
+    // } else {
+    //   showToast("error", "Uploading Error");
+    // }
+    // _uploadMetaData(nftName, result?.pinataURL).then(async(res)=>{
+    _uploadMetaData(nftName, genImg[0]).then(async(res)=>{
       if (res.success === true) {
         showToast("success", "Successfully uploaded");
         console.log("uploaded Metadata url:", res?.pinataURL);
@@ -209,23 +211,15 @@ const Minting = () => {
                 suppressHydrationWarning
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-4 gap-4">
-                  <ImageCard />
-                  <ImageCard />
-                  <ImageCard />
-                  <ImageCard />
+                  <ImageCard imgSrc = "./back.png"/>
+                  <ImageCard imgSrc = "./back.png"/>
+                  <ImageCard imgSrc = "./back.png"/>
+                  <ImageCard imgSrc = "./back.png"/>
                 </div>
               </AccordionItem>
             </Accordion>
-            <label className="block">
-              <span className="sr-only">Choose profile photo</span>
-              <input
-                type="file"
-                onChange={event => setUploadFileName(event.target.files[0])}
-                className="block w-full text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
-              />
-            </label>
             <div>
-              <div className="bg-white-900 grid grid-cols-2F md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-4 gap-4">
+              <div className="bg-white-900 flex justify-center items-center">
                 <input
                   value={inputVal}
                   onChange={(e) => setInputVal(e.target.value)}
@@ -233,7 +227,7 @@ const Minting = () => {
                   className=" block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-black-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 gap-4 lg:grid-cols-4">
                 <Building params={{ selected, setSelected }} />
                 <Age age={age} setAge={setAge} />
                 <Environment environment={environment} setEnvironment={setEnvironment} />
@@ -243,13 +237,9 @@ const Minting = () => {
               <div>
                 <button className="text-white bg-violet-500 rounded-full px-9 py-2" onClick={GenerateImage}>Generate Image</button>
                 {genImg &&
-                  <img width={250} height={250} src={genImg} alt='Generated image' />
+                  <ImageCard imgSrc = {genImg[0]} />
                 }
               </div>
-
-              <button onClick={_mint} className="text-white bg-violet-500 rounded-full px-9 py-2">
-                Mint
-              </button>
               <Button onPress={onOpen} className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg">Mint NFT</Button>
 
             </div>

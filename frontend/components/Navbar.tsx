@@ -74,8 +74,8 @@ export default function ConnectButton() {
       <ul
         className={
           nav
-            ? 'fixed md:hidden left-0 top-0 w-[40%] h-full border-r border-r-gray-900 bg-[#000300] ease-in-out duration-500'
-            : 'ease-in-out w-[40%] duration-500 fixed top-0 bottom-0 left-[-100%]'
+            ? 'z-10 fixed md:hidden left-0 top-0 w-[40%] h-full border-r border-r-gray-900 bg-[#000300] ease-in-out duration-500'
+            : 'z-10 ease-in-out w-[40%] duration-500 fixed top-0 bottom-0 left-[-100%]'
         }
       >
         <div className="w-full text-3xl font-bold text-[#00df9a] flex flex-col">
