@@ -8,28 +8,31 @@ import { uploadFileToIPFS, uploadJSONToIPFS } from './pinata';
 import Content from '@/components/Content';
 import ImageCard from '@/components/ImageCard';
 import { Accordion, AccordionItem } from "@nextui-org/react";
-import { FaEye } from "react-icons/fa";
+import { FaEye, FaImage, FaImages } from "react-icons/fa";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link} from "@nextui-org/react";
 import { showToast } from '@/helper/ToastNotify';
 import { type BaseError, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
-import { ParseEther, parseEther } from 'viem';
+import { parseEther } from 'viem';
+import erc20ABI from '@/contracts/ERC20ABI.json';
+
 
 const Minting = () => {
-
+  const erc20TokenAddress = "0x0406dbBF7B62f79F8d889F30cC1F0E9191c404D4";
   const contractAddress = nftmAbi.address; 
   const contractAbi = nftmAbi.abi; 
   const [uploadFileName, setUploadFileName] = useState<string>("");
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [nftName, setNftName] = useState<string>("");
   const [fileURL, setFileURL] = useState<string>("");
+  const [isProcess, setIsProcess] = useState<boolean>(false);
   const {
     data: hash,
     isPending, 
     error,
-    writeContract
+    writeContractAsync
   } = useWriteContract();
-
-
+  
+  
   // upload metadata of image to the pinata IPFS
   const _uploadMetaData = (nftColName:string, nftFileURL:string) => {
     return new Promise((resolve, reject)=>{
@@ -39,18 +42,18 @@ const Minting = () => {
         showToast("error", "Plz input name exactly!");
         reject("error occured")
       }
-
+      
       const nftJSON = {
         nftName, image: nftFileURL
       }
       console.log('nftJson:', nftJSON);
-        //upload the metadata JSON to IPFS
+      //upload the metadata JSON to IPFS
       uploadJSONToIPFS(nftJSON)
       .then(res=>{
         if(res.success === true){
-            console.log("Uploaded JSON to Pinata: ", res)
-            resolve(res);
-            // return res.pinataURL;
+          console.log("Uploaded JSON to Pinata: ", res)
+          resolve(res);
+          // return res.pinataURL;
         }
       })
       .catch(err=>{
@@ -58,9 +61,17 @@ const Minting = () => {
       })
     });
   }
-
+  
   const _mint = async () => {
     console.log('upload:', uploadFileName);
+    setIsProcess(true);
+    const tx = await writeContractAsync({
+      abi: erc20ABI,
+      address: erc20TokenAddress,
+      functionName: 'approve',
+      args: [contractAddress, parseEther('1')],
+    });
+    console.log("tx1:", tx);
     const result = await uploadFileToIPFS(uploadFileName);
     if (result?.success === true) {
       console.log("uploaded image url:",result?.pinataURL);
@@ -68,18 +79,20 @@ const Minting = () => {
     } else {
       showToast("error", "uploading Error");
     }
-    _uploadMetaData(nftName, result?.pinataURL).then(res=>{
+    _uploadMetaData(nftName, result?.pinataURL).then(async(res)=>{
       if (res.success === true) {
         showToast("success", "Successfully uploaded");
         console.log("uploaded Metadata url:", res?.pinataURL);
-        writeContract({ 
+        const tx2 = await writeContractAsync({ 
           address: contractAddress, 
           abi: contractAbi,
           functionName: 'createToken', 
-          args: [res?.pinataURL, parseEther('0.001')], 
+          args: [[res?.pinataURL], parseEther('1')], 
         });
+        console.log("tx2:", tx2);
       }
     }); // or we can use useEffect() hook for state update. the state variable will be update after re-rendering.
+    setIsProcess(false);
   };
 
   const { isLoading: isConfirming, isSuccess: isConfirmed } = 
@@ -95,15 +108,15 @@ const Minting = () => {
       <Sidebar />
       <Content>
         <>
-          <div className="px-8 py-4">
+          <div className="flex flex-col gap-8 px-8 py-4">
             <div className="flex justify-center">
               <h1 className="text-center text-3xl">Mint your NFT!</h1>
             </div>
-            <Accordion suppressHydrationWarning>
+            <Accordion suppressHydrationWarning variant="splitted">
               <AccordionItem
                 key="anchor"
                 aria-label="Anchor"
-                indicator={<FaEye />}
+                indicator={<FaImage />}
                 title="Show samples"
                 suppressHydrationWarning
               >
@@ -130,13 +143,7 @@ const Minting = () => {
               />
             </label>
             <div>
-              <button
-                onClick={() => _mint}
-                className="text-white bg-violet-500 rounded-full px-9 py-2"
-              >
-                Mint
-              </button>
-              <Button onPress={onOpen}>Mint NFT</Button>
+              <Button onPress={onOpen} className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg">Mint NFT</Button>
             </div>
           </div>
           <Modal backdrop='blur' isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -154,7 +161,7 @@ const Minting = () => {
                       <Input
                         autoFocus
                         endContent={
-                          <FaEye className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                          <FaImages className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                         }
                         label="Name"
                         placeholder="Enter your NFT name"
@@ -162,21 +169,18 @@ const Minting = () => {
                         onChange={(event)=>setNftName(event.target.value)}
                       />
                     </div>
-                    {hash && <div>Transaction Hash: {hash}</div>} 
-                    {isConfirming && <div>Waiting for confirmation...</div>} 
-                    {isConfirmed && <div>Transaction confirmed.</div>}
-                    {isPending ? 'Confirming...' : 'Mint'} 
-                    {error && ( 
-                      <div>Error: {(error as BaseError).shortMessage || error.message}</div> 
-                    )} 
                   </ModalBody>
                   <ModalFooter>
                     <Button color="danger" variant="light" onPress={onClose}>
                       Close
                     </Button>
-                    <Button color="primary" onClick={_mint}>
-                      Mint
+                    <Button color="primary" onClick={_mint} isLoading={isProcess || isPending || isConfirming}>
+                      {isPending || isConfirming  ? 'Confirming...' : 'Mint'} 
                     </Button>
+                    {isConfirming && showToast("info", "waiting for Transaction comfirming...")} 
+                    {/* {isConfirmed && showToast("success", "Transaction confirmed. NFT Minted!")} */}
+                    {/* {isConfirmed && onClose()} */}
+                    {error && showToast("error", error.message)} 
                   </ModalFooter>
                 </>
               )}
