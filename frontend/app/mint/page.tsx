@@ -13,9 +13,11 @@ import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDis
 import { showToast } from '@/helper/ToastNotify';
 import { type BaseError, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
 import { parseEther } from 'viem';
+import erc20ABI from '@/contracts/ERC20ABI.json';
+
 
 const Minting = () => {
-
+  const erc20TokenAddress = "0x0406dbBF7B62f79F8d889F30cC1F0E9191c404D4";
   const contractAddress = nftmAbi.address; 
   const contractAbi = nftmAbi.abi; 
   const [uploadFileName, setUploadFileName] = useState<string>("");
@@ -27,11 +29,10 @@ const Minting = () => {
     data: hash,
     isPending, 
     error,
-    writeContract
+    writeContractAsync
   } = useWriteContract();
-
-
-
+  
+  
   // upload metadata of image to the pinata IPFS
   const _uploadMetaData = (nftColName:string, nftFileURL:string) => {
     return new Promise((resolve, reject)=>{
@@ -41,18 +42,18 @@ const Minting = () => {
         showToast("error", "Plz input name exactly!");
         reject("error occured")
       }
-
+      
       const nftJSON = {
         nftName, image: nftFileURL
       }
       console.log('nftJson:', nftJSON);
-        //upload the metadata JSON to IPFS
+      //upload the metadata JSON to IPFS
       uploadJSONToIPFS(nftJSON)
       .then(res=>{
         if(res.success === true){
-            console.log("Uploaded JSON to Pinata: ", res)
-            resolve(res);
-            // return res.pinataURL;
+          console.log("Uploaded JSON to Pinata: ", res)
+          resolve(res);
+          // return res.pinataURL;
         }
       })
       .catch(err=>{
@@ -60,10 +61,17 @@ const Minting = () => {
       })
     });
   }
-
+  
   const _mint = async () => {
     console.log('upload:', uploadFileName);
     setIsProcess(true);
+    const tx = await writeContractAsync({
+      abi: erc20ABI,
+      address: erc20TokenAddress,
+      functionName: 'approve',
+      args: [contractAddress, parseEther('1')],
+    });
+    console.log("tx1:", tx);
     const result = await uploadFileToIPFS(uploadFileName);
     if (result?.success === true) {
       console.log("uploaded image url:",result?.pinataURL);
@@ -71,16 +79,17 @@ const Minting = () => {
     } else {
       showToast("error", "uploading Error");
     }
-    _uploadMetaData(nftName, result?.pinataURL).then(res=>{
+    _uploadMetaData(nftName, result?.pinataURL).then(async(res)=>{
       if (res.success === true) {
         showToast("success", "Successfully uploaded");
         console.log("uploaded Metadata url:", res?.pinataURL);
-        writeContract({ 
+        const tx2 = await writeContractAsync({ 
           address: contractAddress, 
           abi: contractAbi,
           functionName: 'createToken', 
-          args: [res?.pinataURL, parseEther('0.001')], 
+          args: [[res?.pinataURL], parseEther('1')], 
         });
+        console.log("tx2:", tx2);
       }
     }); // or we can use useEffect() hook for state update. the state variable will be update after re-rendering.
     setIsProcess(false);
@@ -168,11 +177,11 @@ const Minting = () => {
                     <Button color="primary" onClick={_mint} isLoading={isProcess || isPending || isConfirming}>
                       {isPending || isConfirming  ? 'Confirming...' : 'Mint'} 
                     </Button>
+                    {isConfirming && showToast("info", "waiting for Transaction comfirming...")} 
+                    {/* {isConfirmed && showToast("success", "Transaction confirmed. NFT Minted!")} */}
+                    {/* {isConfirmed && onClose()} */}
+                    {error && showToast("error", error.message)} 
                   </ModalFooter>
-                  {isConfirming && showToast("info", "waiting for Transaction comfirming...")} 
-                    {isConfirmed && showToast("success", "Transaction confirmed. NFT Minted!")}
-                    {isConfirmed && onClose()}
-                    {error && showToast("error", (error as BaseError).shortMessage || error.message)} 
                 </>
               )}
             </ModalContent>
