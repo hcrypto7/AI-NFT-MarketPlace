@@ -8,11 +8,10 @@ import Content from '@/components/Content';
 import ImageCard from '@/components/ImageCard';
 import { Accordion, AccordionItem } from "@nextui-org/react";
 
-import { FaEye } from "react-icons/fa";
+import { FaEye, FaImage } from "react-icons/fa";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link } from "@nextui-org/react";
 import { showToast } from '@/helper/ToastNotify';
 import { type BaseError, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
-import { ParseEther, parseEther } from 'viem';
 import Building from '@/components/Building';
 import Age from '@/components/AgeSelectbox';
 import Weather from '@/components/WeatherSelectbox';
