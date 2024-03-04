@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract NFTMarketplace is ERC721URIStorage {
 
-    address private constant NYNYC_TOKEN = 0x0406dbBF7B62f79F8d889F30cC1F0E9191c404D4;
+    address private constant NYNYC_TOKEN = 0x3e1533C3a56e1F0214c0Be902e277f2dE097035f;
 
     //_tokenIds variable has the most recent minted tokenId
     uint256 private _tokenIds;

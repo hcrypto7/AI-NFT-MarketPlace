@@ -26,7 +26,7 @@ import erc20ABI from '@/contracts/ERC20ABI.json';
 
 
 const Minting = () => {
-  const erc20TokenAddress = "0x0406dbBF7B62f79F8d889F30cC1F0E9191c404D4";
+  const erc20TokenAddress = "0x3e1533C3a56e1F0214c0Be902e277f2dE097035f";
   const [inputVal, setInputVal] = useState('')
   const contractAddress = nftmAbi.address;
   const contractAbi = nftmAbi.abi;

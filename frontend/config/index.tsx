@@ -21,7 +21,8 @@ export const config = createConfig({
   chains: [mainnet, sepolia, bsc, polygon, polygonMumbai, bscTestnet],
   transports: {
     [mainnet.id]: http(),
-    [sepolia.id]: http(),
+    [sepolia.id]: http("https://eth-sepolia.g.alchemy.com/v2/FxBgZvpWVsDWVfJMj_u3UU_KN2HY2c1Q",
+    {key: 'FxBgZvpWVsDWVfJMj_u3UU_KN2HY2c1Q'}),
     [bsc.id]: http(),
     [polygon.id]: http(),
     [polygonMumbai.id]: http("https://polygon-mumbai.g.alchemy.com/v2/EcSrakQPOXrrDZq9rY3D_JPAlVe6QpBO",
